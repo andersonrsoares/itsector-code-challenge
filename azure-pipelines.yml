@@ -20,3 +20,16 @@ steps:
     publishJUnitResults: false
     testResultsFiles: '**/TEST-*.xml'
     tasks: 'assembleDebug'
+- task: Gradle@2
+  displayName: 'jacocoTestReport'
+  inputs:
+    workingDirectory: '$(Build.SourcesDirectory)'
+    gradleWrapperFile: 'gradlew'
+    gradleOptions: '-Xmx3072m'
+    tasks: 'jacocoTestReport'
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'JaCoCo'
+    summaryFileLocation: '$(System.DefaultWorkingDirectory)/app/build/reports/jacoco/report.xml'
+    pathToSources: '$(System.DefaultWorkingDirectory)/app/src/main/java'
+    reportDirectory: '$(System.DefaultWorkingDirectory)/app/build/reports/jacoco'
