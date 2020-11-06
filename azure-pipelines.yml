@@ -21,7 +21,7 @@ steps:
 - task: Gradle@2
   displayName: 'Build app'
   inputs:
-    workingDirectory: ''
+    workingDirectory: '$(Build.SourcesDirectory)'
     gradleWrapperFile: 'gradlew'
     gradleOptions: '-Xmx3072m'
     publishJUnitResults: false
