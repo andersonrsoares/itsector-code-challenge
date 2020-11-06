@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/listFotoFragment"
-        android:name="br.com.anderson.itsectorcodechallenge.ui.listfoto.ListFotoFragment">
+        android:name="br.com.anderson.itsectorcodechallenge.ui.listphoto.ListPhotoFragment">
 
         <action
             android:id="@+id/action_listFotoFragment_to_fotoFragment"
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/fotoFragment"
-        android:name="br.com.anderson.itsectorcodechallenge.ui.foto.FotoFragment">
+        android:name="br.com.anderson.itsectorcodechallenge.ui.photo.PhonoFragment">
         <argument android:name="fotoUrl"
             app:argType="string"
             app:nullable="true"/>
