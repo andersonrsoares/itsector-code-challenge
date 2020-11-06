@@ -1,6 +1,7 @@
 package br.com.anderson.itsectorcodechallenge.services
 
 import br.com.anderson.itsectorcodechallenge.ApiUtil
+import br.com.anderson.itsectorcodechallenge.extras.extractMessage
 import com.google.common.truth.Truth.assertThat
 import com.google.gson.stream.MalformedJsonException
 import org.junit.Test
@@ -83,7 +84,7 @@ class ServiceRecipiesTest : BaseServiceTest() {
 
         // THEN
         response.assertError {
-            it is HttpException && (it as? HttpException)?.code() == 401
+            it is HttpException && (it as? HttpException)?.code() == 401 && it.extractMessage() == "OAuth error: The access token is invalid"
         }
     }
 }

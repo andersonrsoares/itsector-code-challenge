@@ -1,6 +1,7 @@
 package br.com.anderson.itsectorcodechallenge.extras
 
 
+import br.com.anderson.itsectorcodechallenge.dto.BaseDTO
 import br.com.anderson.itsectorcodechallenge.model.DataSourceResult
 import br.com.anderson.itsectorcodechallenge.model.ErrorResult
 import com.google.gson.Gson
@@ -45,5 +46,12 @@ fun HttpException.handleServerError(): ErrorResult {
 }
 
 fun HttpException.extractMessage(): String {
-    return this.response()?.errorBody()?.string().orEmpty()
+    return try {
+        Gson().fromJson(
+            this.response()?.errorBody()?.string(),
+            BaseDTO::class.java
+        ).errors.orEmpty().joinToString("\n")
+    } catch (e: Exception) {
+        this.response()?.errorBody()?.string().orEmpty()
+    }
 }
