@@ -25,14 +25,7 @@ steps:
     gradleWrapperFile: 'gradlew'
     gradleOptions: '-Xmx3072m'
     tasks: 'assembleDebug'
-
-- task: Gradle@2
-  displayName: 'Lint'
-  inputs:
-    workingDirectory: '$(Build.SourcesDirectory)'
-    gradleWrapperFile: 'gradlew'
-    gradleOptions: '-Xmx3072m'
-    tasks: 'ktlint'
+    
 - task: Gradle@2
   displayName: 'jacocoTestReport'
   inputs:
