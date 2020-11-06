@@ -1,15 +1,15 @@
 package br.com.anderson.itsectorcodechallenge.mapper
 
 
-import br.com.anderson.itsectorcodechallenge.dto.FotoDTO
-import br.com.anderson.itsectorcodechallenge.model.Foto
+import br.com.anderson.itsectorcodechallenge.dto.PhotoDTO
+import br.com.anderson.itsectorcodechallenge.model.Photo
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class FotoMapper @Inject constructor() : Mapper<FotoDTO, Foto>() {
+class FotoMapper @Inject constructor() : Mapper<PhotoDTO, Photo>() {
 
-    override fun map(from: FotoDTO): Foto = Foto(
-        id = from.id.orEmpty(), description = from.description.orEmpty(), downloadUrl = from.links?.download.orEmpty(), smallUrl = from.urls?.small.orEmpty()
+    override fun map(from: PhotoDTO): Photo = Photo(
+        id = from.id.orEmpty(), downloadUrl = from.links?.download.orEmpty(), smallUrl = from.urls?.thumb.orEmpty()
     )
 }

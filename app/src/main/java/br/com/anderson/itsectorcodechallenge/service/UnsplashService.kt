@@ -1,6 +1,6 @@
 package br.com.anderson.itsectorcodechallenge.service
 
-import br.com.anderson.itsectorcodechallenge.dto.FotoDTO
+import br.com.anderson.itsectorcodechallenge.dto.PhotoDTO
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -12,5 +12,5 @@ import retrofit2.http.Query
 interface UnsplashService{
 
     @GET("/photos")
-    fun photos(@Query("page") page:Int): Single<List<FotoDTO>>
+    fun photos(@Query("page") page:Int): Single<List<PhotoDTO>>
 }
