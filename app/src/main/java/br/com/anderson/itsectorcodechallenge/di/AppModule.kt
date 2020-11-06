@@ -4,8 +4,8 @@ import br.com.anderson.itsectorcodechallenge.dto.PhotoDTO
 import br.com.anderson.itsectorcodechallenge.mapper.FotoMapper
 import br.com.anderson.itsectorcodechallenge.mapper.Mapper
 import br.com.anderson.itsectorcodechallenge.model.Photo
-import br.com.anderson.itsectorcodechallenge.repository.FotoRepository
-import br.com.anderson.itsectorcodechallenge.repository.FotoRepositoryImpl
+import br.com.anderson.itsectorcodechallenge.repository.PhotoRepository
+import br.com.anderson.itsectorcodechallenge.repository.PhotoRepositoryImpl
 import br.com.anderson.itsectorcodechallenge.service.UnsplashService
 import dagger.Module
 import dagger.Provides
@@ -19,8 +19,8 @@ class AppModule {
     fun provideFotoRepository(
             remoteDataSource: UnsplashService,
             fotoMapper: Mapper<PhotoDTO, Photo>
-    ): FotoRepository {
-        return FotoRepositoryImpl(
+    ): PhotoRepository {
+        return PhotoRepositoryImpl(
                 remoteDataSource,
                 fotoMapper
         )
