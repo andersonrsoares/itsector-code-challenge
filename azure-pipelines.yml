@@ -19,11 +19,17 @@ steps:
   displayName: 'Run a multi-line script'
 
 - task: Gradle@2
-  displayName: 'Build app'
+  displayName: 'Build'
   inputs:
     workingDirectory: '$(Build.SourcesDirectory)'
     gradleWrapperFile: 'gradlew'
     gradleOptions: '-Xmx3072m'
-    publishJUnitResults: false
-    testResultsFiles: '**/TEST-*.xml'
     tasks: 'assembleDebug'
+
+- task: Gradle@2
+  displayName: 'Lint'
+  inputs:
+    workingDirectory: '$(Build.SourcesDirectory)'
+    gradleWrapperFile: 'gradlew'
+    gradleOptions: '-Xmx3072m'
+    tasks: 'ktlint'
