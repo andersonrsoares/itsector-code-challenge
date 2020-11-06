@@ -1,0 +1,235 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'jacoco'
+}
+
+configurations {
+    ktlint
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "br.com.anderson.itsectorcodechallenge"
+        minSdkVersion 23
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField 'String', 'CLIENT_ID', '"52ed5e63ad1915fed2bbfd2326aade6b8549b050fc8367a7c105567476df2a81"'
+        buildConfigField 'String', 'URL', '"https://api.unsplash.com/"'
+    }
+
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        androidTest.java.srcDirs += "src/test-common/java"
+        test.java.srcDirs += "src/test-common/java"
+    }
+
+    testOptions {
+        animationsDisabled true
+
+        unitTests {
+            returnDefaultValues = true
+            includeAndroidResources = true
+        }
+    }
+
+    buildFeatures {
+        viewBinding = true
+    }
+}
+
+dependencies {
+    ktlint "com.pinterest:ktlint:0.39.0"
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "androidx.core:core-ktx:$core_ktx"
+    implementation "androidx.appcompat:appcompat:$appcompat"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout"
+    implementation "com.google.android.material:material:$material"
+
+    implementation "androidx.legacy:legacy-support-v4:$support"
+    implementation "androidx.legacy:legacy-support-core-utils:$support"
+    implementation "androidx.annotation:annotation:$support"
+    implementation "androidx.recyclerview:recyclerview:$support"
+
+    implementation "androidx.fragment:fragment-ktx:$fragment"
+
+    //room
+    implementation "androidx.room:room-runtime:$room"
+    implementation "androidx.room:room-testing:$room"
+    implementation "androidx.room:room-rxjava2:$room"
+
+    //lifecicle
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle"
+
+    //arch
+    implementation "androidx.arch.core:core-runtime:$arch_core" //
+
+    //navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation"//
+    implementation "androidx.navigation:navigation-runtime-ktx:$navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation"
+    //retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    implementation "com.squareup.retrofit2:retrofit-mock:$retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_logging_interceptor"
+
+    // RxJava
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava"
+    //  RxAndroid
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid"
+
+    //dagger
+    implementation "com.google.dagger:dagger:$dagger"
+    implementation "com.google.dagger:dagger-android:$dagger"
+    implementation "com.google.dagger:dagger-android-support:$dagger"
+
+    implementation "com.jakewharton.timber:timber:$timber"
+
+    //kapt
+    kapt "androidx.room:room-compiler:$room"//
+    kapt "com.google.dagger:dagger-compiler:$dagger"
+    kapt "com.google.dagger:dagger-android-processor:$dagger"
+
+    //test libs
+    testImplementation 'junit:junit:4.13'
+    testImplementation "org.robolectric:robolectric:4.4"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$mockwebserver"
+    testImplementation "com.squareup.okhttp3:okhttp:$okhttp"
+    testImplementation "org.mockito:mockito-core:$mockito"
+    testImplementation "org.mockito:mockito-inline:$mockito"
+    testImplementation 'org.json:json:20180130'
+    testImplementation "androidx.test:core:$test_core"
+    testImplementation "androidx.test:core-ktx:$test_core"
+    testImplementation "androidx.test.ext:junit-ktx:$atsl_junit"
+    testImplementation "androidx.arch.core:core-testing:$arch_core"
+    testImplementation "androidx.test:runner:$atsl_runner"
+    testImplementation "androidx.test:rules:$atsl_runner"
+    testImplementation "androidx.test.ext:truth:$ext_truth"
+    testImplementation "com.google.truth:truth:$truth"
+    testImplementation "androidx.annotation:annotation:$support"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    testImplementation "androidx.test.espresso:espresso-core:$espresso"
+    testImplementation "androidx.test.espresso:espresso-contrib:$espresso"
+    testImplementation "androidx.test.espresso:espresso-intents:$espresso"
+    testImplementation "androidx.arch.core:core-testing:$arch_core"
+
+    debugImplementation("androidx.fragment:fragment-testing:$fragment")
+    debugImplementation("androidx.fragment:fragment-ktx:$fragment")
+    debugImplementation "androidx.test:core:$test_core"
+    debugImplementation "androidx.test:core-ktx:$test_core"
+    debugImplementation "androidx.test:runner:$atsl_runner"
+    debugImplementation "androidx.test:rules:$atsl_runner"
+    debugImplementation "com.squareup.okhttp3:mockwebserver:$mockwebserver"
+
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espresso"
+    androidTestImplementation "androidx.test:core-ktx:$test_core"
+    androidTestImplementation "androidx.test.ext:junit-ktx:$atsl_junit"
+    androidTestImplementation "androidx.arch.core:core-testing:$arch_core"
+    androidTestImplementation "androidx.test.ext:junit:$atsl_junit"
+    androidTestImplementation "androidx.test:runner:$atsl_runner"
+    androidTestImplementation "androidx.test:rules:$atsl_runner"
+    androidTestImplementation "org.mockito:mockito-core:$mockito"
+    androidTestImplementation "org.mockito:mockito-android:$mockito"
+
+}
+
+
+jacoco {
+    toolVersion = "0.8.4"
+}
+
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+}
+
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
+    group = 'Reporting'
+    description = 'Generate Jacoco coverage reports'
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+        csv.enabled = false
+        xml.destination file("${buildDir}/reports/jacoco/report.xml")
+    }
+
+    def fileFilters =
+            ['android/databinding/**/*.class',
+             '**/android/databinding/*Binding.class',
+             '**/BR.*',
+             '**/R.class',
+             '**/R$*.class',
+             '**/BuildConfig.*',
+             '**/Manifest*.*',
+             '**/*Test*.*',
+             'android/**/*.*',
+             'com/android/**/*.class',
+             '**/*_MembersInjector.class',
+             '**/Dagger*Component.class',
+             '**/Dagger*Component$Builder.class',
+             '**/*_*Factory.class',
+             '**/*ComponentImpl.class',
+             '**/*SubComponentBuilder.class',
+             '**/*$InjectAdapter.class',
+             '**/*$ModuleAdapter.class',
+             '**/*$ViewInjector*.class',
+             '**/*Module_*Factory.class',
+             '**/*$ViewInjector*.*',
+             '**/*$ViewBinder*.*',
+             "**/androidx"]
+
+
+    def kotlinDebugTree = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug", excludes: fileFilters)
+
+    sourceDirectories.from = files(['src/main/java'])
+    classDirectories.from = files([kotlinDebugTree])//javaDebugTree,
+    executionData.from = fileTree(dir: project.buildDir, includes: [
+            'jacoco/*.exec', 'outputs/code_coverage/debugAndroidTest/connected/**/*.ec'])
+}
+
+task ktlint(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    main = "com.pinterest.ktlint.Main"
+    classpath = configurations.ktlint
+    args "src/**/*.kt"
+    // to generate report in checkstyle format prepend following args:
+    // "--reporter=plain", "--reporter=checkstyle,output=${buildDir}/ktlint.xml"
+    // see https://github.com/pinterest/ktlint#usage for more
+}
+
+check.dependsOn ktlint
+
+task ktlintAutoCorrect(type: JavaExec, group: "formatting") {
+    description = "Fix Kotlin code style deviations."
+    main = "com.pinterest.ktlint.Main"
+    classpath = configurations.ktlint
+    args "-F", "src/**/*.kt"
+}
