@@ -21,9 +21,9 @@ steps:
 - task: Gradle@2
   displayName: 'Build app'
   inputs:
+    workingDirectory: ''
     gradleWrapperFile: 'gradlew'
-    tasks: 'buildDebug'
-    publishJUnitResults: true
+    gradleOptions: '-Xmx3072m'
+    publishJUnitResults: false
     testResultsFiles: '**/TEST-*.xml'
-    javaHomeOption: 'JDKVersion'
-    sonarQubeRunAnalysis: false
+    tasks: 'assembleDebug'
