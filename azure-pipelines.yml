@@ -20,7 +20,7 @@ steps:
 
 - task: Gradle@2
   inputs:
-    gradleWrapperFile: 'Build with Gradle'
+    gradleWrapperFile: 'gradlew'
     tasks: 'buildDebug'
     publishJUnitResults: true
     testResultsFiles: '**/TEST-*.xml'
