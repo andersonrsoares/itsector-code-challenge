@@ -21,8 +21,6 @@ steps:
 - task: Gradle@2
   inputs:
     gradleWrapperFile: 'Build with Gradle'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
     tasks: 'buildDebug'
-    publishJUnitResults: true
-    testResultsFiles: '**/TEST-*.xml'
     javaHomeOption: 'JDKVersion'
-    sonarQubeRunAnalysis: false
