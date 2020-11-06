@@ -117,6 +117,49 @@ dependencies {
     kapt "androidx.room:room-compiler:$room"//
     kapt "com.google.dagger:dagger-compiler:$dagger"
     kapt "com.google.dagger:dagger-android-processor:$dagger"
+
+    //test libs
+    testImplementation 'junit:junit:4.13'
+    testImplementation "org.robolectric:robolectric:4.4"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$mockwebserver"
+    testImplementation "com.squareup.okhttp3:okhttp:$okhttp"
+    testImplementation "org.mockito:mockito-core:$mockito"
+    testImplementation "org.mockito:mockito-inline:$mockito"
+    testImplementation 'org.json:json:20180130'
+    testImplementation "androidx.test:core:$test_core"
+    testImplementation "androidx.test:core-ktx:$test_core"
+    testImplementation "androidx.test.ext:junit-ktx:$atsl_junit"
+    testImplementation "androidx.arch.core:core-testing:$arch_core"
+    testImplementation "androidx.test:runner:$atsl_runner"
+    testImplementation "androidx.test:rules:$atsl_runner"
+    testImplementation "androidx.test.ext:truth:$ext_truth"
+    testImplementation "com.google.truth:truth:$truth"
+    testImplementation "androidx.annotation:annotation:$support"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    testImplementation "androidx.test.espresso:espresso-core:$espresso"
+    testImplementation "androidx.test.espresso:espresso-contrib:$espresso"
+    testImplementation "androidx.test.espresso:espresso-intents:$espresso"
+    testImplementation "androidx.arch.core:core-testing:$arch_core"
+
+    debugImplementation("androidx.fragment:fragment-testing:$fragment")
+    debugImplementation("androidx.fragment:fragment-ktx:$fragment")
+    debugImplementation "androidx.test:core:$test_core"
+    debugImplementation "androidx.test:core-ktx:$test_core"
+    debugImplementation "androidx.test:runner:$atsl_runner"
+    debugImplementation "androidx.test:rules:$atsl_runner"
+    debugImplementation "com.squareup.okhttp3:mockwebserver:$mockwebserver"
+
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espresso"
+    androidTestImplementation "androidx.test:core-ktx:$test_core"
+    androidTestImplementation "androidx.test.ext:junit-ktx:$atsl_junit"
+    androidTestImplementation "androidx.arch.core:core-testing:$arch_core"
+    androidTestImplementation "androidx.test.ext:junit:$atsl_junit"
+    androidTestImplementation "androidx.test:runner:$atsl_runner"
+    androidTestImplementation "androidx.test:rules:$atsl_runner"
+    androidTestImplementation "org.mockito:mockito-core:$mockito"
+    androidTestImplementation "org.mockito:mockito-android:$mockito"
+
 }
 
 

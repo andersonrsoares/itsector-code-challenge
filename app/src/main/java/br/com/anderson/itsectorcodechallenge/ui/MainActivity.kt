@@ -1,7 +1,7 @@
 package br.com.anderson.itsectorcodechallenge.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         initNavigation()
     }
 
-    private fun initNavigation(){
+    private fun initNavigation() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment
         navController = navHostFragment.navController
