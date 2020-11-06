@@ -10,17 +10,13 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
 
 - task: Gradle@2
+  displayName: 'Build app'
   inputs:
-    gradleWrapperFile: 'Build with Gradle'
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
-    tasks: 'buildDebug'
-    javaHomeOption: 'JDKVersion'
+    workingDirectory: '$(Build.SourcesDirectory)'
+    gradleWrapperFile: 'gradlew'
+    gradleOptions: '-Xmx3072m'
+    publishJUnitResults: false
+    testResultsFiles: '**/TEST-*.xml'
+    tasks: 'assembleDebug'
