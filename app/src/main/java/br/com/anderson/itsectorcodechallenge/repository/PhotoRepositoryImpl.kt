@@ -12,10 +12,10 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-internal class FotoRepositoryImpl @Inject constructor(
-    val remoteDataSource: UnsplashService,
-    val fotoMapper: Mapper<PhotoDTO,Photo>
-) : FotoRepository{
+internal class PhotoRepositoryImpl @Inject constructor(
+    private val remoteDataSource: UnsplashService,
+    private val fotoMapper: Mapper<PhotoDTO,Photo>
+) : PhotoRepository{
 
     override fun getFotos(page: Int): Observable<DataSourceResult<List<Photo>>> {
         return remoteDataSource.photos(page)
