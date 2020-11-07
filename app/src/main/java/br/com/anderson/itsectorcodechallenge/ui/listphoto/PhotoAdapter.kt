@@ -38,8 +38,7 @@ class PhotoAdapter : ListAdapter<Photo, PhotoAdapter.Holder>(
                 itemOnClick(data)
             }
 
-            Glide.with(image.context).load(data.smallUrl).apply(
-                    RequestOptions().centerCrop()).into(image)
+            Glide.with(image.context).load(data.smallUrl).apply(RequestOptions().placeholder(R.drawable.image_placeholder).centerCrop()).into(image)
         }
     }
 
