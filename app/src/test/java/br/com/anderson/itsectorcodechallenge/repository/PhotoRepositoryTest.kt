@@ -3,6 +3,7 @@ package br.com.anderson.itsectorcodechallenge.repository
 import br.com.anderson.itsectorcodechallenge.ApiUtil
 import br.com.anderson.itsectorcodechallenge.ListPhotoDTO
 import br.com.anderson.itsectorcodechallenge.MockJSONDataSource
+import br.com.anderson.itsectorcodechallenge.MockJSONDataSourceRule
 import br.com.anderson.itsectorcodechallenge.dto.PhotoDTO
 import br.com.anderson.itsectorcodechallenge.mapper.FotoMapper
 import br.com.anderson.itsectorcodechallenge.mock
