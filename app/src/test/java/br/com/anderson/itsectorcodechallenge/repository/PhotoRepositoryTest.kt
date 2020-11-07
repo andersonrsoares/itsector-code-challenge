@@ -1,11 +1,8 @@
 package br.com.anderson.itsectorcodechallenge.repository
 
-import br.com.anderson.itsectorcodechallenge.ApiUtil
-import br.com.anderson.itsectorcodechallenge.MockJSONDataSource
-import br.com.anderson.itsectorcodechallenge.MockJSONDataSourceRule
+import br.com.anderson.itsectorcodechallenge.*
 import br.com.anderson.itsectorcodechallenge.dto.PhotoDTO
 import br.com.anderson.itsectorcodechallenge.mapper.FotoMapper
-import br.com.anderson.itsectorcodechallenge.mock
 import br.com.anderson.itsectorcodechallenge.model.DataSourceResult
 import br.com.anderson.itsectorcodechallenge.model.ErrorResult
 import br.com.anderson.itsectorcodechallenge.service.UnsplashService
@@ -28,7 +25,6 @@ import java.util.concurrent.TimeoutException
 
 @RunWith(JUnit4::class)
 class PhotoRepositoryTest {
-    class ListPhotoDTO : ArrayList<PhotoDTO>()
 
     private val service = mock<UnsplashService>()
     private lateinit var photoRepository: PhotoRepository
