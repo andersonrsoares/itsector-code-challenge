@@ -25,8 +25,6 @@ android {
         buildConfigField 'String', 'URL', '"https://api.unsplash.com/"'
     }
 
-
-
     buildTypes {
         release {
             minifyEnabled false
@@ -112,10 +110,17 @@ dependencies {
 
     implementation "com.jakewharton.timber:timber:$timber"
 
+    //glide
+    implementation "com.github.bumptech.glide:glide:$glide"
+    implementation("com.github.bumptech.glide:okhttp3-integration:$glide") {
+        exclude group: 'glide-parent'
+    }
+
     //kapt
     kapt "androidx.room:room-compiler:$room"//
     kapt "com.google.dagger:dagger-compiler:$dagger"
     kapt "com.google.dagger:dagger-android-processor:$dagger"
+    kapt "com.github.bumptech.glide:compiler:$glide"
 
     //test libs
     testImplementation 'junit:junit:4.13'

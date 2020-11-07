@@ -6,6 +6,7 @@
     android:id="@+id/main_app">
 
     <fragment
+        android:label="@string/title_photos"
         android:id="@+id/listFotoFragment"
         android:name="br.com.anderson.itsectorcodechallenge.ui.listphoto.ListPhotoFragment">
 
@@ -16,6 +17,7 @@
 
 
     <fragment
+        android:label="@string/title_photo"
         android:id="@+id/fotoFragment"
         android:name="br.com.anderson.itsectorcodechallenge.ui.photo.PhonoFragment">
         <argument android:name="fotoUrl"
