@@ -27,7 +27,7 @@ class ListPhotoFragment : Fragment(R.layout.fragment_list_photo), Injectable {
     @Inject
     lateinit var factory: ViewModelProvider.Factory
 
-    private var fragmentBinding: FragmentListPhotoBinding? = null
+    private lateinit var fragmentBinding: FragmentListPhotoBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,7 +47,7 @@ class ListPhotoFragment : Fragment(R.layout.fragment_list_photo), Injectable {
     }
 
     private fun initRetryButton() {
-        fragmentBinding?.retrybutton?.setOnClickListener(this::onRetryClick)
+        fragmentBinding?.retrybutton.setOnClickListener(this::onRetryClick)
     }
 
     fun onRetryClick(view: View) {
@@ -56,7 +56,7 @@ class ListPhotoFragment : Fragment(R.layout.fragment_list_photo), Injectable {
     }
 
     private fun initrRefresh() {
-        fragmentBinding?.swiperefresh?.setOnRefreshListener(this::onRefresh)
+        fragmentBinding.swiperefresh.setOnRefreshListener(this::onRefresh)
     }
 
     fun onRefresh() {
@@ -77,8 +77,8 @@ class ListPhotoFragment : Fragment(R.layout.fragment_list_photo), Injectable {
 
     private fun initRecycleView() {
         adapter = PhotoAdapter()
-        fragmentBinding?.recycleview?.adapter = adapter
-        fragmentBinding?.recycleview?.layoutManager = LinearLayoutManager(requireContext()).apply {
+        fragmentBinding.recycleview.adapter = adapter
+        fragmentBinding.recycleview.layoutManager = LinearLayoutManager(requireContext()).apply {
             orientation = LinearLayoutManager.VERTICAL
         }
         adapter.itemOnClick = this::onItemClick
@@ -89,7 +89,7 @@ class ListPhotoFragment : Fragment(R.layout.fragment_list_photo), Injectable {
     }
 
     private fun initScrollListener() {
-        val layoutManager = fragmentBinding?.recycleview?.layoutManager as LinearLayoutManager
+        val layoutManager = fragmentBinding.recycleview.layoutManager as LinearLayoutManager
         fragmentBinding.recycleview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -112,8 +112,8 @@ class ListPhotoFragment : Fragment(R.layout.fragment_list_photo), Injectable {
     }
 
     private fun onLoading(data: Boolean) {
-        fragmentBinding?.progressloadingnextpage.isVisible = data && adapter.currentList.isNotEmpty()
-        fragmentBinding?.swiperefresh?.isRefreshing = data && adapter.currentList.isEmpty()
+        fragmentBinding.progressloadingnextpage.isVisible = data && adapter.currentList.isNotEmpty()
+        fragmentBinding.swiperefresh.isRefreshing = data && adapter.currentList.isEmpty()
     }
 
     private fun onClean(data: Boolean) {
@@ -123,13 +123,6 @@ class ListPhotoFragment : Fragment(R.layout.fragment_list_photo), Injectable {
 
     private fun onRetry(data: String) {
         Toast.makeText(requireContext(), data, Toast.LENGTH_LONG).show()
-        fragmentBinding?.retrybutton?.isVisible = true
-    }
-
-    override fun onDestroyView() {
-        // Consider not storing the binding instance in a field, if not needed.
-        fragmentBinding = null
-        super.onDestroyView()
-
+        fragmentBinding.retrybutton.isVisible = true
     }
 }

@@ -13,24 +13,19 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
-@Module(includes = [NetworkModule::class, ViewModelModule::class])
+@Module(includes = [NetworkModule::class])
 class AppModule {
 
     @Singleton
     @Provides
     fun providePhotoRepository(
-        remoteDataSource: UnsplashService,
-        photoMapper: Mapper<PhotoDTO, Photo>
+        remoteDataSource: UnsplashService
     ): PhotoRepository {
         return PhotoRepositoryImpl(
             remoteDataSource,
-            photoMapper
+            FotoMapper()
         )
     }
-
-    @Singleton
-    @Provides
-    fun providePhotoMapper(): Mapper<PhotoDTO, Photo> = FotoMapper()
 
     @Singleton
     @Provides
