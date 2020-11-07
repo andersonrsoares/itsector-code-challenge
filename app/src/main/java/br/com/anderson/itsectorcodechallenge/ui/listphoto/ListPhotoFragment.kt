@@ -12,17 +12,18 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import br.com.anderson.itsectorcodechallenge.R
 import br.com.anderson.itsectorcodechallenge.databinding.FragmentListPhotoBinding
 import br.com.anderson.itsectorcodechallenge.di.Injectable
+import br.com.anderson.itsectorcodechallenge.extras.autoCleared
 import br.com.anderson.itsectorcodechallenge.extras.observe
 import br.com.anderson.itsectorcodechallenge.model.Photo
 import javax.inject.Inject
 
 class ListPhotoFragment : Fragment(R.layout.fragment_list_photo), Injectable {
 
-    lateinit var adapter: PhotoAdapter
+    private var adapter by autoCleared<PhotoAdapter>()
+    private var fragmentBinding by autoCleared<FragmentListPhotoBinding>()
 
     val viewModel: ListPhotoViewModel by viewModels {
         factory
@@ -31,7 +32,6 @@ class ListPhotoFragment : Fragment(R.layout.fragment_list_photo), Injectable {
     @Inject
     lateinit var factory: ViewModelProvider.Factory
 
-    private lateinit var fragmentBinding: FragmentListPhotoBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
