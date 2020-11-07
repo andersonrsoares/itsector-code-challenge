@@ -2,22 +2,17 @@ package br.com.anderson.itsectorcodechallenge.listphoto
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import br.com.anderson.itsectorcodechallenge.*
 import br.com.anderson.itsectorcodechallenge.dto.PhotoDTO
-import br.com.anderson.itsectorcodechallenge.extras.extractMessage
+import br.com.anderson.itsectorcodechallenge.mock
 import br.com.anderson.itsectorcodechallenge.model.DataSourceResult
 import br.com.anderson.itsectorcodechallenge.model.Photo
 import br.com.anderson.itsectorcodechallenge.provider.ResourceProvider
 import br.com.anderson.itsectorcodechallenge.repository.PhotoRepository
 import br.com.anderson.itsectorcodechallenge.ui.listphoto.ListPhotoViewModel
-import com.google.gson.Gson
 import com.google.gson.stream.MalformedJsonException
-import io.reactivex.Flowable
 import io.reactivex.Observable
-import io.reactivex.Single
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.schedulers.Schedulers
-import okhttp3.Protocol
 import okhttp3.ResponseBody.Companion.toResponseBody
 import org.junit.Before
 import org.junit.Rule
@@ -25,13 +20,13 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import org.mockito.ArgumentMatchers
-import org.mockito.BDDMockito
-import org.mockito.BDDMockito.*
+import org.mockito.BDDMockito.given
+import org.mockito.BDDMockito.never
+import org.mockito.BDDMockito.then
+import org.mockito.BDDMockito.times
 import retrofit2.HttpException
 import retrofit2.Response
-import java.net.UnknownHostException
 import java.util.concurrent.TimeoutException
-
 
 @RunWith(JUnit4::class)
 class ListPhotoViewModelTest {
@@ -44,12 +39,11 @@ class ListPhotoViewModelTest {
 
     private lateinit var listPhotoViewModel: ListPhotoViewModel
 
-
     @Before
     fun init() {
         listPhotoViewModel =
-                ListPhotoViewModel(
-                        photoRepository
+            ListPhotoViewModel(
+                photoRepository
             )
         listPhotoViewModel.resourceProvider = resourceProvider
         RxAndroidPlugins.setInitMainThreadSchedulerHandler { Schedulers.trampoline() }
@@ -58,8 +52,10 @@ class ListPhotoViewModelTest {
     @Test
     fun `list photos success`() {
 
-        val remoteData = listOf(Photo(id = "1", smallUrl = "http://smallimage1.com",downloadUrl = "http://largeimage1.com" ),
-                Photo(id = "2", smallUrl = "http://smallimage2.com",downloadUrl = "http://largeimage2.com" ) )
+        val remoteData = listOf(
+            Photo(id = "1", smallUrl = "http://smallimage1.com", downloadUrl = "http://largeimage1.com"),
+            Photo(id = "2", smallUrl = "http://smallimage2.com", downloadUrl = "http://largeimage2.com")
+        )
 
         given(photoRepository.getFotos(1)).willReturn(Observable.just(DataSourceResult.create(remoteData)))
 
@@ -74,7 +70,6 @@ class ListPhotoViewModelTest {
         then(observerData).should().onChanged(remoteData)
         then(observerLoading).should(times(2)).onChanged(false)
     }
-
 
     @Test
     fun `list photos success data empty`() {
@@ -122,11 +117,15 @@ class ListPhotoViewModelTest {
     @Test
     fun `list error server 404`() {
         given(resourceProvider.getString(ArgumentMatchers.anyInt())).willReturn("error network")
-        given(photoRepository.getFotos(1)).willReturn(Observable.just(DataSourceResult.error(
-            HttpException(
-                    Response.error<List<PhotoDTO>>(404,  "".toResponseBody())
+        given(photoRepository.getFotos(1)).willReturn(
+            Observable.just(
+                DataSourceResult.error(
+                    HttpException(
+                        Response.error<List<PhotoDTO>>(404, "".toResponseBody())
+                    )
+                )
             )
-        )))
+        )
 
         val observerData = mock<Observer<List<Photo>>>()
         val observerLoading = mock<Observer<Boolean>>()
@@ -145,11 +144,15 @@ class ListPhotoViewModelTest {
 
     @Test
     fun `list error server 500`() {
-        given(photoRepository.getFotos(1)).willReturn(Observable.just(DataSourceResult.error(
-                HttpException(
-                        Response.error<List<PhotoDTO>>(500,  "error".toResponseBody())
+        given(photoRepository.getFotos(1)).willReturn(
+            Observable.just(
+                DataSourceResult.error(
+                    HttpException(
+                        Response.error<List<PhotoDTO>>(500, "error".toResponseBody())
+                    )
                 )
-        )))
+            )
+        )
 
         val observerData = mock<Observer<List<Photo>>>()
         val observerLoading = mock<Observer<Boolean>>()
@@ -169,9 +172,13 @@ class ListPhotoViewModelTest {
     @Test
     fun `list error json parse`() {
         given(resourceProvider.getString(ArgumentMatchers.anyInt())).willReturn("error server")
-        given(photoRepository.getFotos(1)).willReturn(Observable.just(DataSourceResult.error(
-                MalformedJsonException("")
-        )))
+        given(photoRepository.getFotos(1)).willReturn(
+            Observable.just(
+                DataSourceResult.error(
+                    MalformedJsonException("")
+                )
+            )
+        )
 
         val observerData = mock<Observer<List<Photo>>>()
         val observerLoading = mock<Observer<Boolean>>()
@@ -190,9 +197,13 @@ class ListPhotoViewModelTest {
 
     @Test
     fun `list error generic`() {
-        given(photoRepository.getFotos(1)).willReturn(Observable.just(DataSourceResult.error(
-                Throwable("error")
-        )))
+        given(photoRepository.getFotos(1)).willReturn(
+            Observable.just(
+                DataSourceResult.error(
+                    Throwable("error")
+                )
+            )
+        )
 
         val observerData = mock<Observer<List<Photo>>>()
         val observerLoading = mock<Observer<Boolean>>()
@@ -211,12 +222,15 @@ class ListPhotoViewModelTest {
 
     @Test
     fun `list photos success page 2`() {
-        val remoteData = listOf(Photo(id = "1", smallUrl = "http://smallimage1.com",downloadUrl = "http://largeimage1.com" ),
-                Photo(id = "2", smallUrl = "http://smallimage2.com",downloadUrl = "http://largeimage2.com" ) )
+        val remoteData = listOf(
+            Photo(id = "1", smallUrl = "http://smallimage1.com", downloadUrl = "http://largeimage1.com"),
+            Photo(id = "2", smallUrl = "http://smallimage2.com", downloadUrl = "http://largeimage2.com")
+        )
 
-        val remoteData2 = listOf(Photo(id = "1", smallUrl = "http://smallimage1.com",downloadUrl = "http://largeimage1.com" ),
-                Photo(id = "2", smallUrl = "http://smallimage2.com",downloadUrl = "http://largeimage2.com" ) )
-
+        val remoteData2 = listOf(
+            Photo(id = "1", smallUrl = "http://smallimage1.com", downloadUrl = "http://largeimage1.com"),
+            Photo(id = "2", smallUrl = "http://smallimage2.com", downloadUrl = "http://largeimage2.com")
+        )
 
         given(photoRepository.getFotos(1)).willReturn(Observable.just(DataSourceResult.create(remoteData)))
         given(photoRepository.getFotos(2)).willReturn(Observable.just(DataSourceResult.create(remoteData2)))
@@ -232,7 +246,7 @@ class ListPhotoViewModelTest {
         then(observerData).should().onChanged(remoteData)
         then(observerLoading).should(times(2)).onChanged(false)
 
-        //page 2
+        // page 2
         listPhotoViewModel.listScrolled(2, 3, 5)
         then(observerLoading).should(times(2)).onChanged(true)
         then(photoRepository).should().getFotos(2)

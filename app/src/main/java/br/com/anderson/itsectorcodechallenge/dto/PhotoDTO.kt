@@ -1,8 +1,6 @@
 package br.com.anderson.itsectorcodechallenge.dto
 import com.google.gson.annotations.SerializedName
 
-
-
 data class PhotoDTO(
     val id: String? = null,
     @SerializedName("urls")

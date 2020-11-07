@@ -1,6 +1,5 @@
 package br.com.anderson.itsectorcodechallenge.mapper
 
-
 import br.com.anderson.itsectorcodechallenge.dto.PhotoDTO
 import br.com.anderson.itsectorcodechallenge.model.Photo
 import javax.inject.Inject

@@ -17,7 +17,7 @@ class ServiceRecipiesTest : BaseServiceTest() {
         // GIVEN
         ApiUtil.enqueueResponse(mockWebServer, "photos_response_success.json")
 
-        val page  = 1
+        val page = 1
         val response = service.photos(page).test()
 
         // when
@@ -38,7 +38,7 @@ class ServiceRecipiesTest : BaseServiceTest() {
         // GIVEN
         ApiUtil.enqueueResponse(mockWebServer, "photos_response_success_null_values.json")
 
-        val page  = 1
+        val page = 1
         val response = service.photos(page).test()
 
         // when
@@ -53,8 +53,6 @@ class ServiceRecipiesTest : BaseServiceTest() {
         assertThat(photosResult[0].links?.download).isEqualTo(null)
         assertThat(photosResult[0].urls?.thumb).isEqualTo(null)
     }
-
-
 
     @Test
     fun `test response not json`() {

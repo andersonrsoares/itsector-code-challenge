@@ -2,7 +2,6 @@ package br.com.anderson.itsectorcodechallenge.ui.listphoto
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import br.com.anderson.itsectorcodechallenge.R
 import br.com.anderson.itsectorcodechallenge.model.DataSourceResult
 import br.com.anderson.itsectorcodechallenge.model.Photo
 import br.com.anderson.itsectorcodechallenge.repository.PhotoRepository
@@ -34,7 +33,7 @@ class ListPhotoViewModel @Inject constructor(private val photoRepository: PhotoR
     fun listPhotos() {
         _loading.postValue(true)
         disposable.add(
-                photoRepository
+            photoRepository
                 .getFotos(currentPage)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::subscrible, this::error, this::complete)

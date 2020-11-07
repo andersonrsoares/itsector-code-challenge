@@ -9,8 +9,8 @@ import retrofit2.http.Query
  * REST API access points
  */
 
-interface UnsplashService{
+interface UnsplashService {
 
     @GET("/photos")
-    fun photos(@Query("page") page:Int): Single<List<PhotoDTO>>
+    fun photos(@Query("page") page: Int): Single<List<PhotoDTO>>
 }

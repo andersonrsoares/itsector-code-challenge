@@ -10,6 +10,5 @@ class ListPhotoFragment : Fragment(R.layout.fragment_list_photo), Injectable {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
     }
 }

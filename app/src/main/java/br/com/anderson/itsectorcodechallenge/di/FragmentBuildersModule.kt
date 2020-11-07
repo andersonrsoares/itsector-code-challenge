@@ -1,7 +1,7 @@
 package br.com.anderson.itsectorcodechallenge.di
 
-import br.com.anderson.itsectorcodechallenge.ui.photo.PhonoFragment
 import br.com.anderson.itsectorcodechallenge.ui.listphoto.ListPhotoFragment
+import br.com.anderson.itsectorcodechallenge.ui.photo.PhonoFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

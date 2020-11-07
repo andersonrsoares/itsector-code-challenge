@@ -1,6 +1,5 @@
 package br.com.anderson.itsectorcodechallenge.extras
 
-
 import br.com.anderson.itsectorcodechallenge.dto.ErrorDTO
 import br.com.anderson.itsectorcodechallenge.model.DataSourceResult
 import br.com.anderson.itsectorcodechallenge.model.ErrorResult

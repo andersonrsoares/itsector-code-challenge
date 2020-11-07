@@ -2,7 +2,6 @@ package br.com.anderson.itsectorcodechallenge.model
 
 import br.com.anderson.itsectorcodechallenge.extras.handleException
 
-
 data class DataSourceResult<T>(val body: T? = null, val error: ErrorResult? = null) {
     companion object {
         fun <T> error(error: Throwable): DataSourceResult<T> {
