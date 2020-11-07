@@ -20,7 +20,7 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "br.com.anderson.itsectorcodechallengeCustomTestRunner"
         buildConfigField 'String', 'CLIENT_ID', '"52ed5e63ad1915fed2bbfd2326aade6b8549b050fc8367a7c105567476df2a81"'
         buildConfigField 'String', 'URL', '"https://api.unsplash.com/"'
     }
