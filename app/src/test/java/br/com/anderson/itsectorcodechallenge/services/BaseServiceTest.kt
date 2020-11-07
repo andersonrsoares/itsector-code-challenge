@@ -23,7 +23,7 @@ open class BaseServiceTest {
             .baseUrl(mockWebServer.url("/"))
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-             .client(OkHttpClient().newBuilder().addInterceptor(AuthorizationInterceptor()).build())
+            .client(OkHttpClient().newBuilder().addInterceptor(AuthorizationInterceptor()).build())
             .build()
             .create(UnsplashService::class.java)
     }

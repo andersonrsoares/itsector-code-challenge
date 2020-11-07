@@ -14,14 +14,14 @@ import javax.inject.Singleton
 @Singleton
 internal class PhotoRepositoryImpl @Inject constructor(
     private val remoteDataSource: UnsplashService,
-    private val fotoMapper: Mapper<PhotoDTO,Photo>
-) : PhotoRepository{
+    private val photoMapper: Mapper<PhotoDTO, Photo>
+) : PhotoRepository {
 
     override fun getFotos(page: Int): Observable<DataSourceResult<List<Photo>>> {
         return remoteDataSource.photos(page)
-                .subscribeOn(Schedulers.io())
-                .map {
-                    it.map { item-> fotoMapper.map(item) }
-                }.transformToDataSourceResult().toObservable()
+            .subscribeOn(Schedulers.io())
+            .map {
+                it.map { item -> photoMapper.map(item) }
+            }.transformToDataSourceResult().toObservable()
     }
 }

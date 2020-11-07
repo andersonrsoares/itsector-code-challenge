@@ -1,6 +1,5 @@
 package br.com.anderson.itsectorcodechallenge.extras
 
-
 import br.com.anderson.itsectorcodechallenge.dto.ErrorDTO
 import br.com.anderson.itsectorcodechallenge.model.DataSourceResult
 import br.com.anderson.itsectorcodechallenge.model.ErrorResult
@@ -33,7 +32,7 @@ fun Throwable.handleException(): ErrorResult {
         is UnknownHostException, is TimeoutException -> ErrorResult.NetworkError
         is MalformedJsonException -> ErrorResult.ServerError
         is HttpException -> this.handleServerError()
-        else -> ErrorResult.GenericError()
+        else -> ErrorResult.GenericError(this.message)
     }
 }
 
@@ -46,12 +45,10 @@ fun HttpException.handleServerError(): ErrorResult {
 }
 
 fun HttpException.extractMessage(): String {
+    val errorBody = this.response()?.errorBody()?.string()
     return try {
-        Gson().fromJson(
-            this.response()?.errorBody()?.string(),
-            ErrorDTO::class.java
-        ).errors.orEmpty().joinToString("\n")
+        Gson().fromJson(errorBody, ErrorDTO::class.java).errors.orEmpty().joinToString("\n")
     } catch (e: Exception) {
-        this.response()?.errorBody()?.string().orEmpty()
+        errorBody.orEmpty()
     }
 }

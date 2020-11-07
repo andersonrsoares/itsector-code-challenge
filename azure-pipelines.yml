@@ -10,9 +10,17 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-
 - task: Gradle@2
-  displayName: 'Build app'
+  displayName: 'Lint'
+  inputs:
+    workingDirectory: '$(Build.SourcesDirectory)'
+    gradleWrapperFile: 'gradlew'
+    gradleOptions: '-Xmx3072m'
+    publishJUnitResults: false
+    testResultsFiles: '**/TEST-*.xml'
+    tasks: 'ktlint'
+- task: Gradle@2
+  displayName: 'Build'
   inputs:
     workingDirectory: '$(Build.SourcesDirectory)'
     gradleWrapperFile: 'gradlew'

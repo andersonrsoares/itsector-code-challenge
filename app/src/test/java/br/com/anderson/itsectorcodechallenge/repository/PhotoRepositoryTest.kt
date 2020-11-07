@@ -1,6 +1,7 @@
 package br.com.anderson.itsectorcodechallenge.repository
 
 import br.com.anderson.itsectorcodechallenge.ApiUtil
+import br.com.anderson.itsectorcodechallenge.ListPhotoDTO
 import br.com.anderson.itsectorcodechallenge.MockJSONDataSource
 import br.com.anderson.itsectorcodechallenge.MockJSONDataSourceRule
 import br.com.anderson.itsectorcodechallenge.dto.PhotoDTO
@@ -12,6 +13,7 @@ import br.com.anderson.itsectorcodechallenge.service.UnsplashService
 import com.google.gson.Gson
 import com.google.gson.stream.MalformedJsonException
 import io.reactivex.Single
+import okhttp3.ResponseBody.Companion.toResponseBody
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -20,15 +22,12 @@ import org.junit.runners.JUnit4
 import org.mockito.BDDMockito.given
 import retrofit2.HttpException
 import retrofit2.Response
-import java.util.concurrent.TimeUnit
-import okhttp3.ResponseBody.Companion.toResponseBody
-import org.junit.After
 import java.net.UnknownHostException
+import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeoutException
 
 @RunWith(JUnit4::class)
 class PhotoRepositoryTest {
-    class ListPhotoDTO : ArrayList<PhotoDTO>()
 
     private val service = mock<UnsplashService>()
     private lateinit var photoRepository: PhotoRepository
@@ -58,7 +57,7 @@ class PhotoRepositoryTest {
         testSubscriber.assertNoErrors()
         testSubscriber.assertSubscribed()
         testSubscriber.assertComplete()
-        testSubscriber.assertValue(DataSourceResult.create(remoteData.map {  FotoMapper().map(it) } ))
+        testSubscriber.assertValue(DataSourceResult.create(remoteData.map { FotoMapper().map(it) }))
     }
 
     @Test
@@ -84,7 +83,6 @@ class PhotoRepositoryTest {
             it.error is ErrorResult.GenericError && (it.error as ErrorResult.GenericError).errorMessage == "OAuth error: The access token is invalid"
         }
     }
-
 
     @Test
     fun `test get photos error 500`() {
@@ -197,5 +195,4 @@ class PhotoRepositoryTest {
             (it.error as ErrorResult.GenericError).errorMessage == "error"
         }
     }
-
 }

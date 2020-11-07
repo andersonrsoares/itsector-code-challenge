@@ -1,6 +1,5 @@
 package br.com.anderson.itsectorcodechallenge
 
-
 import kotlin.reflect.KClass
 
 @Retention(AnnotationRetention.RUNTIME)
