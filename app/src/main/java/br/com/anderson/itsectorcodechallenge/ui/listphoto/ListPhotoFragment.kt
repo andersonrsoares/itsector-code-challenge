@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -91,7 +92,11 @@ class ListPhotoFragment : Fragment(R.layout.fragment_list_photo), Injectable {
     }
 
     private fun onItemClick(item: Photo) {
-
+        navController().navigate(
+            ListPhotoFragmentDirections.actionListFotoFragmentToFotoFragment(
+                item.downloadUrl
+            )
+        )
     }
 
     private fun initScrollListener() {
@@ -130,4 +135,6 @@ class ListPhotoFragment : Fragment(R.layout.fragment_list_photo), Injectable {
         Toast.makeText(requireContext(), data, Toast.LENGTH_LONG).show()
         fragmentBinding.retrybutton.isVisible = true
     }
+
+    fun navController() = findNavController()
 }

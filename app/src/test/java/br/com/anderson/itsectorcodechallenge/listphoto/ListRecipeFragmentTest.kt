@@ -19,6 +19,7 @@ import br.com.anderson.itsectorcodechallenge.RecyclerViewMatcher
 import br.com.anderson.itsectorcodechallenge.ViewModelUtil
 import br.com.anderson.itsectorcodechallenge.model.Photo
 import br.com.anderson.itsectorcodechallenge.ui.listphoto.ListPhotoFragment
+import br.com.anderson.itsectorcodechallenge.ui.listphoto.ListPhotoFragmentDirections
 import br.com.anderson.itsectorcodechallenge.ui.listphoto.ListPhotoViewModel
 import org.junit.Before
 import org.junit.Test
@@ -64,7 +65,7 @@ class ListRecipeFragmentTest {
         BDDMockito.given(testviewModel.retry).willReturn(retry)
         BDDMockito.given(testviewModel.clean).willReturn(clean)
 
-        liveDataListRecipes.value = arrayListOf(Photo(smallUrl = "url1", id = "id1"))
+        liveDataListRecipes.value = arrayListOf(Photo(smallUrl = "url1", id = "id1", downloadUrl = "url1"))
         val scenario = launchFragmentInContainer<ListPhotoFragment>(themeResId = R.style.Theme_Itsectorcodechallenge, factory = factory)
 
         scenario.onFragment {
@@ -72,9 +73,9 @@ class ListRecipeFragmentTest {
         }
 
         onView(listMatcher().atPosition(0)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-//        onView(ViewMatchers.withText("some title")).perform(ViewActions.click())
+        onView(listMatcher().atPosition(0)).perform(ViewActions.click())
 
-       // Mockito.verify(mockNavController).navigate(ListRecipeFragmentDirections.actionListRecipeFragmentToRecipeFragment("id1"))
+         Mockito.verify(mockNavController).navigate(ListPhotoFragmentDirections.actionListFotoFragmentToFotoFragment("url1"))
 
         scenario.moveToState(Lifecycle.State.RESUMED)
         scenario.moveToState(Lifecycle.State.DESTROYED)
