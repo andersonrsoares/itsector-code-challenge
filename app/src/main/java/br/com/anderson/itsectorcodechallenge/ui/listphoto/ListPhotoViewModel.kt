@@ -31,7 +31,9 @@ class ListPhotoViewModel @Inject constructor(private val photoRepository: PhotoR
     }
 
     fun listPhotos() {
+        _clean.value = false
         _loading.value = true
+        _message.value = ""
         disposable.add(
             photoRepository
                 .getFotos(currentPage)

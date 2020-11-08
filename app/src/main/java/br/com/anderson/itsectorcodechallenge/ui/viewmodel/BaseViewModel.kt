@@ -15,7 +15,7 @@ open class BaseViewModel @Inject constructor() : ViewModel() {
     lateinit var resourceProvider: ResourceProvider
 
     protected val disposable = CompositeDisposable()
-    private var _message = MutableLiveData<String>()
+    protected var _message = MutableLiveData<String>()
     protected var _loading = MutableLiveData<Boolean>()
     protected var _clean = MutableLiveData<Boolean>()
     private var _retry = MutableLiveData<String>()
