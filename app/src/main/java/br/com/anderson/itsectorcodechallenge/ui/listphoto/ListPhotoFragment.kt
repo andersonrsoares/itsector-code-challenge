@@ -52,7 +52,7 @@ class ListPhotoFragment : Fragment(R.layout.fragment_list_photo), Injectable {
         fetchPhotos()
     }
 
-    private fun fetchPhotos(){
+    private fun fetchPhotos() {
         viewModel.listPhotos()
     }
 
