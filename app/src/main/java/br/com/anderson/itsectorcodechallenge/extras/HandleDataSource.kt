@@ -5,7 +5,6 @@ import br.com.anderson.itsectorcodechallenge.model.DataSourceResult
 import br.com.anderson.itsectorcodechallenge.model.ErrorResult
 import com.google.gson.Gson
 import com.google.gson.stream.MalformedJsonException
-import io.reactivex.Maybe
 import io.reactivex.Single
 import retrofit2.HttpException
 import java.net.UnknownHostException
