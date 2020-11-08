@@ -9,7 +9,7 @@ import br.com.anderson.itsectorcodechallenge.ui.viewmodel.BaseViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
-const val VISIBLE_THRESHOLD = 2
+const val VISIBLE_THRESHOLD = 4
 
 class ListPhotoViewModel @Inject constructor(private val photoRepository: PhotoRepository) : BaseViewModel() {
 
@@ -31,7 +31,7 @@ class ListPhotoViewModel @Inject constructor(private val photoRepository: PhotoR
     }
 
     fun listPhotos() {
-        _loading.postValue(true)
+        _loading.value = true
         disposable.add(
             photoRepository
                 .getFotos(currentPage)
@@ -47,8 +47,8 @@ class ListPhotoViewModel @Inject constructor(private val photoRepository: PhotoR
         }
     }
 
-    fun listScrolled(visibleItemCount: Int, lastVisibleItemPosition: Int, totalItemCount: Int) {
-        if (visibleItemCount + lastVisibleItemPosition + VISIBLE_THRESHOLD >= totalItemCount) {
+    fun listScrolled(lastVisibleItemPosition: Int, totalItemCount: Int) {
+        if (lastVisibleItemPosition + VISIBLE_THRESHOLD >= totalItemCount) {
             val immutableQuery = dataPhoto.value
             if (immutableQuery != null) {
                 nextPagePhotos()

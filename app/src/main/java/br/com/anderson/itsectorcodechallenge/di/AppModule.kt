@@ -1,10 +1,7 @@
 package br.com.anderson.itsectorcodechallenge.di
 
 import android.app.Application
-import br.com.anderson.itsectorcodechallenge.dto.PhotoDTO
 import br.com.anderson.itsectorcodechallenge.mapper.FotoMapper
-import br.com.anderson.itsectorcodechallenge.mapper.Mapper
-import br.com.anderson.itsectorcodechallenge.model.Photo
 import br.com.anderson.itsectorcodechallenge.provider.ResourceProvider
 import br.com.anderson.itsectorcodechallenge.repository.PhotoRepository
 import br.com.anderson.itsectorcodechallenge.repository.PhotoRepositoryImpl
@@ -13,24 +10,19 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
-@Module(includes = [NetworkModule::class, ViewModelModule::class])
+@Module(includes = [NetworkModule::class])
 class AppModule {
 
     @Singleton
     @Provides
     fun providePhotoRepository(
-        remoteDataSource: UnsplashService,
-        photoMapper: Mapper<PhotoDTO, Photo>
+        remoteDataSource: UnsplashService
     ): PhotoRepository {
         return PhotoRepositoryImpl(
             remoteDataSource,
-            photoMapper
+            FotoMapper()
         )
     }
-
-    @Singleton
-    @Provides
-    fun providePhotoMapper(): Mapper<PhotoDTO, Photo> = FotoMapper()
 
     @Singleton
     @Provides

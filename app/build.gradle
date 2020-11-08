@@ -20,12 +20,10 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "br.com.anderson.itsectorcodechallengeCustomTestRunner"
         buildConfigField 'String', 'CLIENT_ID', '"52ed5e63ad1915fed2bbfd2326aade6b8549b050fc8367a7c105567476df2a81"'
         buildConfigField 'String', 'URL', '"https://api.unsplash.com/"'
     }
-
-
 
     buildTypes {
         release {
@@ -112,10 +110,17 @@ dependencies {
 
     implementation "com.jakewharton.timber:timber:$timber"
 
+    //glide
+    implementation "com.github.bumptech.glide:glide:$glide"
+    implementation("com.github.bumptech.glide:okhttp3-integration:$glide") {
+        exclude group: 'glide-parent'
+    }
+
     //kapt
     kapt "androidx.room:room-compiler:$room"//
     kapt "com.google.dagger:dagger-compiler:$dagger"
     kapt "com.google.dagger:dagger-android-processor:$dagger"
+    kapt "com.github.bumptech.glide:compiler:$glide"
 
     //test libs
     testImplementation 'junit:junit:4.13'

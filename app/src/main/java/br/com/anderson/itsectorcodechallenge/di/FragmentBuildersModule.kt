@@ -1,7 +1,7 @@
 package br.com.anderson.itsectorcodechallenge.di
 
 import br.com.anderson.itsectorcodechallenge.ui.listphoto.ListPhotoFragment
-import br.com.anderson.itsectorcodechallenge.ui.photo.PhonoFragment
+import br.com.anderson.itsectorcodechallenge.ui.photo.PhotoFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -13,5 +13,5 @@ abstract class FragmentBuildersModule {
     abstract fun contributeListFotoFragment(): ListPhotoFragment
 
     @ContributesAndroidInjector
-    abstract fun contributeFotoFragment(): PhonoFragment
+    abstract fun contributeFotoFragment(): PhotoFragment
 }
