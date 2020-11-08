@@ -22,6 +22,11 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), Injectable {
         return fragmentBinding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        init()
+    }
+
     private fun getUrl() = PhotoFragmentArgs.fromBundle(
         requireArguments()
     ).photoUrl
@@ -30,7 +35,7 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), Injectable {
         Glide.with(requireContext()).load(getUrl()).apply(
             RequestOptions()
                 .placeholder(R.drawable.image_placeholder)
-                .centerCrop()
+                .centerInside()
         ).into(fragmentBinding.fullimage)
 
     }

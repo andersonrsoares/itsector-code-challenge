@@ -23,7 +23,7 @@ import javax.inject.Inject
 
 class ListPhotoFragment : Fragment(R.layout.fragment_list_photo), Injectable {
 
-    private var adapter by autoCleared<PhotoAdapter>()
+    private lateinit var adapter: PhotoAdapter
     private var fragmentBinding by autoCleared<FragmentListPhotoBinding>()
 
     val viewModel: ListPhotoViewModel by viewModels {
@@ -40,7 +40,6 @@ class ListPhotoFragment : Fragment(R.layout.fragment_list_photo), Injectable {
         initRefresh()
         initRetryButton()
         initScrollListener()
-        initObservers()
    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -50,6 +49,8 @@ class ListPhotoFragment : Fragment(R.layout.fragment_list_photo), Injectable {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initAdapter()
+        initObservers()
         fetchPhotos()
     }
 
@@ -82,8 +83,11 @@ class ListPhotoFragment : Fragment(R.layout.fragment_list_photo), Injectable {
         observe(viewModel.retry, this::onRetry)
     }
 
-    private fun initRecycleView() {
+    private fun initAdapter(){
         adapter = PhotoAdapter()
+    }
+
+    private fun initRecycleView() {
         fragmentBinding.recycleview.adapter = adapter
         fragmentBinding.recycleview.layoutManager = GridLayoutManager(requireContext(),2).apply {
             orientation = LinearLayoutManager.VERTICAL
@@ -105,10 +109,9 @@ class ListPhotoFragment : Fragment(R.layout.fragment_list_photo), Injectable {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 val totalItemCount = layoutManager.itemCount
-                val visibleItemCount = layoutManager.childCount
                 val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
 
-                viewModel.listScrolled(visibleItemCount, lastVisibleItem, totalItemCount)
+                viewModel.listScrolled(lastVisibleItem, totalItemCount)
             }
         })
     }
