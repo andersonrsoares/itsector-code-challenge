@@ -1,10 +1,7 @@
 package br.com.anderson.itsectorcodechallenge.di
 
 import android.app.Application
-import br.com.anderson.itsectorcodechallenge.dto.PhotoDTO
 import br.com.anderson.itsectorcodechallenge.mapper.FotoMapper
-import br.com.anderson.itsectorcodechallenge.mapper.Mapper
-import br.com.anderson.itsectorcodechallenge.model.Photo
 import br.com.anderson.itsectorcodechallenge.provider.ResourceProvider
 import br.com.anderson.itsectorcodechallenge.repository.PhotoRepository
 import br.com.anderson.itsectorcodechallenge.repository.PhotoRepositoryImpl

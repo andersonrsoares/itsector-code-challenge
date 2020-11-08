@@ -247,7 +247,7 @@ class ListPhotoViewModelTest {
         then(observerLoading).should(times(2)).onChanged(false)
 
         // page 2
-        listPhotoViewModel.listScrolled(2, 3, 5)
+        listPhotoViewModel.listScrolled( 3, 5)
         then(observerLoading).should(times(2)).onChanged(true)
         then(photoRepository).should().getFotos(2)
         then(observerData).should().onChanged(remoteData2)

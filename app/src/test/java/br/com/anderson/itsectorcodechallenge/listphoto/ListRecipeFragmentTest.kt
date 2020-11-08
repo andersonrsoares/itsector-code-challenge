@@ -75,7 +75,7 @@ class ListRecipeFragmentTest {
         onView(listMatcher().atPosition(0)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         onView(listMatcher().atPosition(0)).perform(ViewActions.click())
 
-         Mockito.verify(mockNavController).navigate(ListPhotoFragmentDirections.actionListFotoFragmentToFotoFragment("url1"))
+        Mockito.verify(mockNavController).navigate(ListPhotoFragmentDirections.actionListFotoFragmentToFotoFragment("url1"))
 
         scenario.moveToState(Lifecycle.State.RESUMED)
         scenario.moveToState(Lifecycle.State.DESTROYED)

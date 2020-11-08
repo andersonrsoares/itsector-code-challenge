@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import br.com.anderson.itsectorcodechallenge.R
-import br.com.anderson.itsectorcodechallenge.databinding.FragmentListPhotoBinding
 import br.com.anderson.itsectorcodechallenge.databinding.FragmentPhotoBinding
 import br.com.anderson.itsectorcodechallenge.di.Injectable
 import br.com.anderson.itsectorcodechallenge.extras.autoCleared
@@ -31,12 +30,11 @@ class PhotoFragment : Fragment(R.layout.fragment_photo), Injectable {
         requireArguments()
     ).photoUrl
 
-    fun init(){
+    fun init() {
         Glide.with(requireContext()).load(getUrl()).apply(
             RequestOptions()
                 .placeholder(R.drawable.image_placeholder)
                 .centerInside()
         ).into(fragmentBinding.fullimage)
-
     }
 }

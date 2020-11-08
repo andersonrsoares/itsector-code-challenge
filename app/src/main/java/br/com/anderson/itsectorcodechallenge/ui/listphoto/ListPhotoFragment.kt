@@ -33,14 +33,13 @@ class ListPhotoFragment : Fragment(R.layout.fragment_list_photo), Injectable {
     @Inject
     lateinit var factory: ViewModelProvider.Factory
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecycleView()
         initRefresh()
         initRetryButton()
         initScrollListener()
-   }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         fragmentBinding = FragmentListPhotoBinding.inflate(layoutInflater, container, false)
@@ -83,13 +82,13 @@ class ListPhotoFragment : Fragment(R.layout.fragment_list_photo), Injectable {
         observe(viewModel.retry, this::onRetry)
     }
 
-    private fun initAdapter(){
+    private fun initAdapter() {
         adapter = PhotoAdapter()
     }
 
     private fun initRecycleView() {
         fragmentBinding.recycleview.adapter = adapter
-        fragmentBinding.recycleview.layoutManager = GridLayoutManager(requireContext(),2).apply {
+        fragmentBinding.recycleview.layoutManager = GridLayoutManager(requireContext(), 2).apply {
             orientation = LinearLayoutManager.VERTICAL
         }
         adapter.itemOnClick = this::onItemClick
