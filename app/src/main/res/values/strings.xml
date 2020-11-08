@@ -7,7 +7,6 @@
     <string name="message_server_error">There is an issue with the server.</string>
     <string name="message_server_network_error_retry">There is an issue connecting with the server.\nplease try again.</string>
     <string name="label_retry"> CLick here to Retry</string>
-    <string name="no_more_results_found">No more results was found</string>
     <string name="message_error">An error has occurred</string>
     <string name="label_description">Description</string>
 </resources>

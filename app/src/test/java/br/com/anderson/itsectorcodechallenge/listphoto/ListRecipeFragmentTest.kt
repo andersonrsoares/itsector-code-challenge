@@ -81,6 +81,53 @@ class ListRecipeFragmentTest {
         scenario.moveToState(Lifecycle.State.DESTROYED)
     }
 
+    @Test fun `test list photo ui error and retry`() {
+        val liveDataListRecipes = MutableLiveData<List<Photo>>()
+        val loading = MutableLiveData<Boolean>()
+        val message = MutableLiveData<String>()
+        val retry = MutableLiveData<String>()
+        val clean = MutableLiveData<Boolean>()
+        BDDMockito.given(testviewModel.dataPhoto).willReturn(liveDataListRecipes)
+        BDDMockito.given(testviewModel.loading).willReturn(loading)
+        BDDMockito.given(testviewModel.message).willReturn(message)
+        BDDMockito.given(testviewModel.retry).willReturn(retry)
+        BDDMockito.given(testviewModel.clean).willReturn(clean)
+
+        retry.value = "error and retry"
+        val scenario = launchFragmentInContainer<ListPhotoFragment>(themeResId = R.style.Theme_Itsectorcodechallenge, factory = factory)
+
+        onView(ViewMatchers.withText("error and retry")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(ViewMatchers.withId(R.id.retrybutton)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+
+        onView(ViewMatchers.withId(R.id.retrybutton)).perform(ViewActions.click())
+        liveDataListRecipes.value = arrayListOf(Photo(smallUrl = "url1", id = "id1", downloadUrl = "url1"))
+        onView(listMatcher().atPosition(0)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+
+        scenario.moveToState(Lifecycle.State.RESUMED)
+        scenario.moveToState(Lifecycle.State.DESTROYED)
+    }
+
+    @Test fun `test list photo ui error message`() {
+        val liveDataListRecipes = MutableLiveData<List<Photo>>()
+        val loading = MutableLiveData<Boolean>()
+        val message = MutableLiveData<String>()
+        val retry = MutableLiveData<String>()
+        val clean = MutableLiveData<Boolean>()
+        BDDMockito.given(testviewModel.dataPhoto).willReturn(liveDataListRecipes)
+        BDDMockito.given(testviewModel.loading).willReturn(loading)
+        BDDMockito.given(testviewModel.message).willReturn(message)
+        BDDMockito.given(testviewModel.retry).willReturn(retry)
+        BDDMockito.given(testviewModel.clean).willReturn(clean)
+
+        message.value = "error"
+        val scenario = launchFragmentInContainer<ListPhotoFragment>(themeResId = R.style.Theme_Itsectorcodechallenge, factory = factory)
+
+        onView(ViewMatchers.withText("error")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+
+        scenario.moveToState(Lifecycle.State.RESUMED)
+        scenario.moveToState(Lifecycle.State.DESTROYED)
+    }
+
     private fun listMatcher(): RecyclerViewMatcher {
         return RecyclerViewMatcher(R.id.recycleview)
     }
