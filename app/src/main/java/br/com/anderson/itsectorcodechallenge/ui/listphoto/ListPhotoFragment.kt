@@ -57,8 +57,13 @@ class ListPhotoFragment : Fragment(R.layout.fragment_list_photo), Injectable {
         fragmentBinding.retrybutton.setOnClickListener(this::onRetryClick)
     }
 
+    fun cleanMessage(){
+        fragmentBinding.message.text = ""
+    }
+
     fun onRetryClick(view: View) {
         viewModel.refresh()
+        cleanMessage()
         view.isVisible = false
     }
 
@@ -67,6 +72,7 @@ class ListPhotoFragment : Fragment(R.layout.fragment_list_photo), Injectable {
     }
 
     fun onRefresh() {
+        cleanMessage()
         viewModel.refresh()
     }
 
@@ -120,7 +126,7 @@ class ListPhotoFragment : Fragment(R.layout.fragment_list_photo), Injectable {
     }
 
     private fun onMessage(data: String) {
-        Toast.makeText(requireContext(), data, Toast.LENGTH_LONG).show()
+        fragmentBinding.message.text = data
     }
 
     private fun onLoading(data: Boolean) {
@@ -134,7 +140,7 @@ class ListPhotoFragment : Fragment(R.layout.fragment_list_photo), Injectable {
     }
 
     private fun onRetry(data: String) {
-        Toast.makeText(requireContext(), data, Toast.LENGTH_LONG).show()
+        fragmentBinding.message.text = data
         fragmentBinding.retrybutton.isVisible = true
     }
 

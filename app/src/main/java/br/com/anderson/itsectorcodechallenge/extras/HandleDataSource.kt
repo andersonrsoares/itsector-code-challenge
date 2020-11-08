@@ -19,10 +19,6 @@ fun <T> Single<T>.transformToDataSourceResult(): Single<DataSourceResult<T>> {
     }
 }
 
-fun <T> Maybe<T>.transformToDataSourceResult(): Maybe<DataSourceResult<T>> {
-    return this.map { DataSourceResult.create(it) }.onErrorReturn { it.createDataSourceResult() }
-}
-
 fun <T> Throwable.createDataSourceResult(): DataSourceResult<T> {
     return DataSourceResult.error(this)
 }
