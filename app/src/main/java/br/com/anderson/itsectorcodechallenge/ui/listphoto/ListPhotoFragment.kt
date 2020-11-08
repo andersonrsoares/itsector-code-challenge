@@ -49,6 +49,11 @@ class ListPhotoFragment : Fragment(R.layout.fragment_list_photo), Injectable {
         super.onCreate(savedInstanceState)
         initAdapter()
         initObservers()
+        fetchPhotos()
+    }
+
+    private fun fetchPhotos(){
+        viewModel.listPhotos()
     }
 
     private fun initRetryButton() {
@@ -61,7 +66,7 @@ class ListPhotoFragment : Fragment(R.layout.fragment_list_photo), Injectable {
     }
 
     fun onRetryClick(view: View) {
-        viewModel.refresh()
+        viewModel.retry()
         cleanMessage()
         view.isVisible = false
     }

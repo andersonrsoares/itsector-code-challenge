@@ -20,10 +20,6 @@ class ListPhotoViewModel @Inject constructor(private val photoRepository: PhotoR
 
     private var currentPage: Int = 1
 
-    init {
-        listPhotos()
-    }
-
     override fun refresh() {
         super.refresh()
         currentPage = 1
