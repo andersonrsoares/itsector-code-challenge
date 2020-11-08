@@ -16,8 +16,6 @@ steps:
     workingDirectory: '$(Build.SourcesDirectory)'
     gradleWrapperFile: 'gradlew'
     gradleOptions: '-Xmx3072m'
-    publishJUnitResults: false
-    testResultsFiles: '**/TEST-*.xml'
     tasks: 'ktlint'
 - task: Gradle@2
   displayName: 'Build'
@@ -25,8 +23,6 @@ steps:
     workingDirectory: '$(Build.SourcesDirectory)'
     gradleWrapperFile: 'gradlew'
     gradleOptions: '-Xmx3072m'
-    publishJUnitResults: false
-    testResultsFiles: '**/TEST-*.xml'
     tasks: 'assembleDebug'
 - task: Gradle@2
   displayName: 'jacocoTestReport'
